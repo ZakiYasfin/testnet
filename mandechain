@@ -33,7 +33,7 @@ read Validator_Name
 echo "_|-_|-_|-_|-_|-_|-_|"
 echo export Validator_Name=${Validator_Name} >> /mnt/hdd2/.bash_profile
 echo export CHAIN_ID="mande-testnet-1" >> /mnt/hdd2/.bash_profile
-source ~/.bash_profile
+source /mnt/hdd2/.bash_profile
 
 echo -e "\e[1m\e[32m1. Updating packages and dependencies--> \e[0m" && sleep 1
 #UPDATE APT
@@ -46,8 +46,8 @@ wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
 rm -rv /usr/local/go; \
 tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
 rm -v go1.18.1.linux-amd64.tar.gz && \
-echo "export PATH=$PATH:/usr/local/go/bin:/mnt/hdd2/go/bin" >> ~/.bash_profile && \
-source ~/.bash_profile && \
+echo "export PATH=$PATH:/usr/local/go/bin:/mnt/hdd2/go/bin" >> /mnt/hdd2/.bash_profile && \
+source /mnt/hdd2/.bash_profile && \
 go version
 
 echo -e "              \e[1m\e[32m3. Downloading and building binaries--> \e[0m" && sleep 1
@@ -67,7 +67,7 @@ wget -O /mnt/hdd2/.mande-chain/config/addrbook.json "https://raw.githubuserconte
 
 echo -e "                     \e[1m\e[32m4. Node optimization and improvement--> \e[0m" && sleep 1
 
-sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0mand\"/;" ~/.mande-chain/config/app.toml
+sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0mand\"/;" /mnt/hdd2/.mande-chain/config/app.toml
 sed -i -e "s/^filter_peers *=.*/filter_peers = \"true\"/" /mnt/hdd2/.mande-chain/config/config.toml
 external_address=$(wget -qO- eth0.me) 
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/" /mnt/hdd2/.mande-chain/config/config.toml
@@ -84,10 +84,10 @@ pruning="custom" && \
 pruning_keep_recent="100" && \
 pruning_keep_every="0" && \
 pruning_interval="10" && \
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" ~/.mande-chain/config/app.toml && \
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" ~/.mande-chain/config/app.toml && \
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" ~/.mande-chain/config/app.toml && \
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" ~/.mande-chain/config/app.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" /mnt/hdd2/.mande-chain/config/app.toml && \
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" /mnt/hdd2/.mande-chain/config/app.toml && \
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" /mnt/hdd2/.mande-chain/config/app.toml && \
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" /mnt/hdd2/.mande-chain/config/app.toml
 indexer="null" && \
 sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" /mnt/hdd2/.mande-chain/config/config.toml
 
@@ -126,7 +126,7 @@ echo -e "      \e[1m\e[35m Your WalletName:\e[0m"
 echo "_|-_|-_|-_|-_|-_|-_|"
 read Wallet
 echo export Wallet=${Wallet} >> /mnt/hdd2/.bash_profile
-source ~/.bash_profile
+source /mnt/hdd2/.bash_profile
 mande-chaind keys add $Wallet
 echo -e "      \e[1m\e[32m!!!!!!!!!SAVE!!!!!!!!!!!!!!!!SAVE YOUR MNEMONIC PHRASE!!!!!!!!!SAVE!!!!!!!!!!!!!!!!\e[0m'"
 
